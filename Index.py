@@ -26,10 +26,14 @@ rec_category_labels = ["Verdict", "Fries Quality", "Bathroom Condition", "Servic
 
 fake_data = ["Yes", "Crispy", "Clean", "Courteous", "Dangerous"]
 
+
 recommendation_data = pd.DataFrame(
     [fake_data],
     columns=rec_category_labels
 )
 
 st.dataframe(data=recommendation_data, hide_index=True)
+
+st.write(' *- Was thinking that we could maybe color code the above fields? I.e. green for positive, red for negative. '
+         'This would result in an easier to read UI dashboard')
 
