@@ -66,3 +66,5 @@ map2_df = pd.DataFrame(pd.read_csv('assets/lat_lon.csv', encoding='utf_8', encod
 
 st.map(map2_df)
 
+st.dataframe(data=map2_df)
+
