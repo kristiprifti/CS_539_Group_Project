@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from PIL import Image
+from streamlit_searchbox import st_searchbox
 
 st.title('McDonalds Guru')
 
@@ -19,10 +20,6 @@ def make_recommnedations(analayzed_data):
 
 
 map_image = Image.open('assets/mcdonalds_heatmap.jpg')
-
-selected_store = st.text_input("Search by Address to see our recommendation")
-
-st.write('the selcted store is currently',selected_store)
 
     #st.image(map_image, caption='Heatmap of Lower 48 US McDonalds Locations')
 
@@ -51,6 +48,17 @@ map_df = pd.DataFrame(pd.read_csv('assets/McDonald_s_Reviews.csv', encoding='utf
                                'rating_count', 'review_time', 'review',
                                'rating'],
                       )
+def search_store_addresses(searchterm):
+    if searchterm:
+        matches = map_df[map_df['store_address'].str.contains(searchterm, case=False, na=False)]
+        return matches['store_address'].tolist()
+    else:
+        return []
+selected_address = st_searchbox(search_store_addresses, 'Search by Address to see our recommendation')
+
+if selected_address:
+    st.write('The selected store is currently', selected_address)
+
 
 st.write('- Interactable map of mcdonalds with reviews in our dataset ')
 st.map(map_df.dropna(subset=["latitude", "longitude"]))
@@ -67,4 +75,3 @@ map2_df = pd.DataFrame(pd.read_csv('assets/lat_lon.csv', encoding='utf_8', encod
 st.map(map2_df)
 
 st.dataframe(data=map2_df)
-
