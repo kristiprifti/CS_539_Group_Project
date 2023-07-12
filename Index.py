@@ -5,6 +5,7 @@ from PIL import Image
 from streamlit_searchbox import st_searchbox
 import folium
 from streamlit_folium import st_folium
+from folium.plugins import MarkerCluster
 
 st.title('McDonalds Guru')
 
@@ -50,6 +51,8 @@ map_df = pd.DataFrame(pd.read_csv('assets/McDonald_s_Reviews.csv', encoding='utf
                                'rating_count', 'review_time', 'review',
                                'rating'],
                       )
+# Drop the whole row if there is any NaN in address column
+map_df.dropna(subset=['store_address'], inplace=True)
 def search_store_addresses(searchterm):
     if searchterm:
         matches = map_df[map_df['store_address'].str.contains(searchterm, case=False, na=False)]
@@ -65,11 +68,24 @@ if selected_address:
     lat = selected_data.iloc[0]['latitude']
     lon = selected_data.iloc[0]['longitude']
 
-    m = folium.Map(location=[lat, lon], zoom_start=15)
+    m = folium.Map(location=[lat, lon], zoom_start=10)
 
     folium.Marker([lat, lon], popup=selected_address).add_to(m)
     
     st_folium(m)
+
+map_df['rating'] = map_df['rating'].str.extract('(\d+)').astype(float)
+location_data = map_df.groupby(['latitude', 'longitude', 'store_address']).agg({'rating': 'mean', 'review': 'count'}).reset_index()
+
+m_all = folium.Map(location=[map_df['latitude'].mean(), map_df['longitude'].mean()], zoom_start=3)
+marker_cluster = MarkerCluster().add_to(m_all)
+
+for _, row in location_data.iterrows():
+    popup_text = f"{row['store_address']}<br>Average rating: {row['rating']:.1f}<br>Number of reviews: {row['review']}"
+    folium.Marker(location=[row['latitude'], row['longitude']], popup=popup_text).add_to(marker_cluster)
+
+st_folium(m_all)
+
 
 
 st.write('- Interactable map of mcdonalds with reviews in our dataset ')
