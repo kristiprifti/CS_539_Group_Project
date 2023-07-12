@@ -3,6 +3,8 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 from streamlit_searchbox import st_searchbox
+import folium
+from streamlit_folium import st_folium
 
 st.title('McDonalds Guru')
 
@@ -58,6 +60,16 @@ selected_address = st_searchbox(search_store_addresses, 'Search by Address to se
 
 if selected_address:
     st.write('The selected store is currently', selected_address)
+
+    selected_data = map_df[map_df['store_address'] == selected_address]
+    lat = selected_data.iloc[0]['latitude']
+    lon = selected_data.iloc[0]['longitude']
+
+    m = folium.Map(location=[lat, lon], zoom_start=15)
+
+    folium.Marker([lat, lon], popup=selected_address).add_to(m)
+    
+    st_folium(m)
 
 
 st.write('- Interactable map of mcdonalds with reviews in our dataset ')
