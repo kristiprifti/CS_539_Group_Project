@@ -74,22 +74,58 @@ if selected_address:
     
     st_folium(m)
 
+st.write('- Interactable map of mcdonalds with reviews in our dataset ')
+
 map_df['rating'] = map_df['rating'].str.extract('(\d+)').astype(float)
 location_data = map_df.groupby(['latitude', 'longitude', 'store_address']).agg({'rating': 'mean', 'review': 'count'}).reset_index()
+
+if "last_object_clicked" not in st.session_state:
+    st.session_state["last_object_clicked"] = None
+if "selected_address" not in st.session_state:
+    st.session_state["selected_address"] = None
 
 m_all = folium.Map(location=[map_df['latitude'].mean(), map_df['longitude'].mean()], zoom_start=3)
 marker_cluster = MarkerCluster().add_to(m_all)
 
 for _, row in location_data.iterrows():
+
     popup_text = f"{row['store_address']}<br>Average rating: {row['rating']:.1f}<br>Number of reviews: {row['review']}"
-    folium.Marker(location=[row['latitude'], row['longitude']], popup=popup_text).add_to(marker_cluster)
+    popup = folium.Popup(popup_text, max_width=300)
+    # Change the icon color based on average rating
+    if row['rating'] >= 4.0:
+        color = 'green'
+    elif row['rating'] >= 3.0:
+        color = 'orange'
+    else:
+        color = 'red'
 
-st_folium(m_all)
+    folium.Marker(location=[row['latitude'], row['longitude']], popup=popup,icon=folium.Icon(color=color)).add_to(marker_cluster)
 
 
 
-st.write('- Interactable map of mcdonalds with reviews in our dataset ')
-st.map(map_df.dropna(subset=["latitude", "longitude"]))
+
+out = st_folium(m_all)
+
+if out["last_object_clicked"]:
+    click_coordinates = tuple(out["last_object_clicked"].values())
+    if click_coordinates != st.session_state["last_object_clicked"]:
+        st.session_state["last_object_clicked"] = click_coordinates
+        address = location_data[location_data['latitude'].between(click_coordinates[0] - 0.0001, click_coordinates[0] + 0.0001) &
+                                location_data['longitude'].between(click_coordinates[1] - 0.0001, click_coordinates[1] + 0.0001)
+                               ]['store_address'].values[0]
+        st.session_state["selected_address"] = address
+        st.experimental_rerun()
+
+# Write the clicked address to the screen
+if st.session_state["selected_address"]:
+    st.write(f"You clicked on: {st.session_state['selected_address']}")
+
+
+st.dataframe(data=map_df, hide_index=True)
+
+
+
+# st.map(map_df.dropna(subset=["latitude", "longitude"]))
 
 
 st.dataframe(data=map_df, hide_index=True)
