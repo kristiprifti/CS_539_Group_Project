@@ -20,3 +20,5 @@ err = mse(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 print(r2)
 
+#shows feature importance for each feature. The sum of all sums to 1.
+print(rf.feature_importances_)
