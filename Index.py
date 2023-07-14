@@ -44,7 +44,7 @@ if selected_address:
     selected_data = map_df[map_df['store_address'] == selected_address]
     lat = selected_data.iloc[0]['latitude']
     lon = selected_data.iloc[0]['longitude']
-    zoom = 11
+    zoom = 10
 
 if st.button('Add all the McDonalds in the US'):
     if 'use_first_dataset' not in st.session_state:
@@ -54,6 +54,7 @@ if st.button('Add all the McDonalds in the US'):
 df = location_data if st.session_state.get('use_first_dataset', True) else map2_df
 
 
+point_size = st.slider('Adjust point size', min_value=50, max_value=15000, value=15000)
 
 # Create a pydeck Layer
 layer = pdk.Layer(
@@ -61,10 +62,18 @@ layer = pdk.Layer(
     df,
     get_position='[longitude, latitude]',
     get_fill_color='[200, 30, 0, 160]' if st.session_state.get('use_first_dataset', True) else '[0, 200, 30, 160]',
-    get_radius=1000,
+    get_radius=point_size,
     pickable=True,
 )
 
+tooltips = {
+    "html": "<b>Address:</b> {store_address}",
+    "style": {"backgroundColor": "steelblue", "color": "white"},
+}
 
-r = pdk.Deck(layers=[layer], initial_view_state=pdk.ViewState(latitude=lat, longitude=lon, zoom=zoom))
+r = pdk.Deck(
+    layers=[layer],
+    initial_view_state=pdk.ViewState(latitude=lat, longitude=lon, zoom=zoom),
+    tooltip=tooltips,
+)
 st.pydeck_chart(r)
