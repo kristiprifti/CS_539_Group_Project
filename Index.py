@@ -15,7 +15,7 @@ st.sidebar.success("Choose a Page")
 st.title('McDonalds Guru')
 
 # Load dataframes
-map_df = pd.DataFrame(pd.read_csv('assets/McDonald_s_Reviews.csv', encoding='utf_8', encoding_errors='replace'),
+map_df = pd.DataFrame(pd.read_csv('assets/cleaned_reviews.csv',  encoding='ISO-8859-1'),
                       columns=['reviewer_id', 'store_name', 'category',
                                'store_address', 'latitude', 'longitude',
                                'rating_count', 'review_time', 'review',
@@ -25,7 +25,7 @@ map_df['rating'] = map_df['rating'].str.extract('(\d+)').astype(float)
 location_data = map_df.groupby(['latitude', 'longitude', 'store_address']).agg(
     {'rating': 'mean', 'review': 'count'}).reset_index()
 
-map2_df = pd.DataFrame(pd.read_csv('assets/lat_lon.csv', encoding='utf_8', encoding_errors='replace'),
+map2_df = pd.DataFrame(pd.read_csv('assets/final_unique_locations.csv', encoding='utf_8', encoding_errors='replace'),
                        columns=['latitude', 'longitude']
                        )
 
