@@ -3,6 +3,15 @@ import pandas as pd
 import pydeck as pdk # using pydeck to create the map
 from streamlit_searchbox import st_searchbox
 
+
+
+st.set_page_config(
+    page_title="Home",
+    page_icon="ALT+8962"
+)
+
+st.sidebar.success("Choose a Page")
+
 st.title('McDonalds Guru')
 
 # Load dataframes
