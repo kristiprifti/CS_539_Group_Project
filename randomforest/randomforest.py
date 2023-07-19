@@ -7,14 +7,19 @@ from sklearn.metrics import mean_squared_error as mse
 from sklearn.metrics import r2_score
 
 #load df, assign X and y, then split with sklearn:
-df = pd.read_csv('df_processed.csv', encoding='ISO-8859-1')
+df = pd.read_csv('randomforest\df_processed.csv', encoding='ISO-8859-1')
 y = df["rating"]
 coords = df["coord"]
 X = df.drop(["rating", "coord"], axis=1)
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.10, random_state=24)
 
 #fit rf and predict rating:
-rf = RandomForestRegressor(n_estimators=100, random_state=12)
+rf = RandomForestRegressor(n_estimators = 1000,
+                           min_samples_split = 2,
+                           min_samples_leaf = 1,
+                           max_features = 'sqrt',
+                           max_depth = 20,
+                           bootstrap = True)
 rf.fit(X_train, y_train)
 y_pred = rf.predict(X_test)
 
