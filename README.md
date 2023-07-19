@@ -1,3 +1,8 @@
+
+                                                                      ![image](https://github.com/WillGodsey/CS_539_Group_Project/assets/25188342/5717d4ff-7e77-4751-8852-24c7202c635d)
+
+
+
 Hello!
 
 Welcome to our WPI CS-539 Project Repo!
@@ -22,3 +27,12 @@ In order to use our code you will need a python environment, and to install the 
 13. re
 
 To use our code you will also need to ensure that you have downlaoded the necessary assets from the repository.
+
+
+To Do:
+include project background info
+include methodology
+include results
+include concluions and future work
+
+PICTURES
