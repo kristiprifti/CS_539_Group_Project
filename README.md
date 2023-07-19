@@ -2,6 +2,7 @@
                                                                      
 
 
+![wpi_Logo](https://github.com/WillGodsey/CS_539_Group_Project/assets/25188342/9ff684f1-381b-46db-8530-82af96ddb083)
 
 Hello!
 
