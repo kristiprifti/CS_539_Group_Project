@@ -1,5 +1,5 @@
 
-                                                                      ![image](https://github.com/WillGodsey/CS_539_Group_Project/assets/25188342/5717d4ff-7e77-4751-8852-24c7202c635d)
+                                                                     
 
 
 
@@ -30,9 +30,9 @@ To use our code you will also need to ensure that you have downlaoded the necess
 
 
 To Do:
-include project background info
-include methodology
-include results
-include concluions and future work
+1. include project background info
+2. include methodology
+3. include results
+4. include concluions and future work
 
 PICTURES
