@@ -73,20 +73,16 @@ timestamp, and the rating value on a scale of one to five. Feature engineering f
 and extracting demographic information for each store location will be performed to find trends and cluster on review 
 topic and rating.  
 
-The team preprocessed the text using NLP Python libraries like spaCy or NLTK, which will 
-deal with the necessary preprocessing. Sentiment analysis gave us more insight into the customer's attitude going 
-beyond their numerical star rating. We started with models like Naive Bayes, Logistic Regression, or SVM, then movef 
-to more complex models for higher accuracy, like CNN with Word2Vec and RNNs for sentiment analysis. With the insight 
-we gained from sentiment analysis, we usef NLP topic modeling to extract common topics and themes in the reviews. 
-Topic modeling combined with sentiment analysis will narrow down the specific aspects of McDonald's that are positive 
-or negative. Since the dataset includes location data, we usef sentiment analysis from the reviews to build a 
-location sentiment heatmap. By mapping out the sentiment and using topic modeling, there is the potential to uncover 
+The team preprocessed the text using NLP Python libraries like spaCy or NLTK. Sentiment analysis gave us more insight into the customer's
+attitude going beyond their numerical star rating. With the insight we gained from sentiment analysis, we used NLP topic 
+modeling to extract common topics and themes in the reviews. Topic modeling combined with sentiment analysis will narrow down the 
+specific aspects of McDonald's that have a significant impact on the star rating. Since the dataset includes location data, we used sentiment analysis 
+from the reviews to build a location sentiment heatmap. By mapping out the sentiment compound scorea and using topic modeling, there is the potential to uncover 
 any trends. For example, rural areas might have higher ratings due to less traffic, or urban stores have low ratings 
-because they are busier with longer wait times. 
+because they are busier with longer wait times. Features created topic modeling and sentiment anyalsis was used to train a random forest model and find which features
+had the most impact on a star rating.
 
-Our approach was to start with the simpler models, evaluate their performance, and then move towards more complex
-models if needed. We will experiment with different models and hyperparameters that need to be tuned, 
-like the number of topics.  
+Our approach was to start with a base model, evaluate its performance, and tune its hyperparameters.
  
     """
 )
@@ -100,34 +96,38 @@ methodology_diagram = Image.open('./assets/methodology_steps.JPG')
 st.image(methodology_diagram, caption="Project Workflow")
 
 st.markdown("""
-    For this project, the first step was to clean the reviews dataset, to ensure that it did not contain any 
+    For this project, the first step was to clean the McDonald's Reviews Kaggle dataset to ensure that it did not contain any 
     unusable data. This cleaning consisted of filtering out punctuation and special characters, performing a spell
-    check, and purging any reviews that were not tied to a particular establishment.  
+    check, and purging any reviews that were not tied to a particular establishment.  The team preprocessed the text using NLP Python 
+    libraries like spaCy and NLTK.
     
-    From here, the team began with exploratory dat analysis, which resulted in the finding shown in the two bar graphs 
-    shown below. Respectively, they show the worst commonly found in :blue["5-Star"] reviews, and those most commonly 
-    found in :blue["1-star"] reviews            
+    From here, the team began with exploratory data analysis to evaluate the distribution of the reviews and word counts by each review. 
+    The graphs below show the most common words found in reviews with :blue["5-Star"] ratings and :blue["1-star"] ratings. 
 """)
 
 rating_positive = Image.open('./assets/rating_5_common_words.png')
-st.image(rating_positive, caption="The most common positive words about McDonalds found in the Review Dataset")
+st.image(rating_positive, caption="The most common words found in 5-star reviews about McDonald's")
 
 rating_negative = Image.open('./assets/rating_1_common_words.png')
-st.image(rating_negative, caption="The most common negative words about McDonalds found in the Review Dataset")
+st.image(rating_negative, caption="The most common words found in 1-star reviews about McDonald's")
+
+st.markdown("""insert about topic modeling here""")
 
 st.markdown(""" 
 The third phase of the team's project largely centered around sentiment analysis, i.e. the process of reviewing digital 
-text in the hopes of ascertaining the emotional tone of the message. A score between -1, the worst, and 1, the best,
-is then assigned to the message based upon the analysis. This process was applied to all of the review data in the 
-Kaggle dataset(https://www.kaggle.com/datasets/nelgiriyewithana/mcdonalds-store-reviews), with adjustments made to 
-account for ratings without a written review.
+text in the hopes of ascertaining the emotional tone of a message. A compound score can be extracted from this analysis to determine the degree 
+of sentiment the message has. Its value can be between -1, indicating negative sentinment, and 1, indicating positive sentinment. 
+This process was applied to all of the review data in the Kaggle dataset(https://www.kaggle.com/datasets/nelgiriyewithana/mcdonalds-store-reviews).
+If there was no review, the star rating was normalized between -1 and 1 to fill in for the compound score. This compound score was added to our master dataset for training.
 
-For the sentiment analysis phase of the project, the team made use of VADER, which stands for
-:blue[V]alence :blue[A]ware :blue[D]ictionary and s:blue[E]ntiment :blue[R]easoner. VADER is a lexicon and rule-based sentiment analysis tool that is 
-specifically attuned to sentiments expressed in social media and text from other domains.
+The team used a sentiment analysis package called VADER, which stands for :blue[V]alence :blue[A]ware :blue[D]ictionary and s:blue[E]ntiment :blue[R]easoner. 
+VADER is a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media and text from other domains.
 """)
 
-st.markdown(""":red[BUILDING AND TUNING A RANDOM FOREST, NEEDS A WRITE UP]""")
+st.markdown("""The fourth phase of this project was the model development phase. The team chose to use a random forest since it performs well in a variety of 
+contexts while being able to measure feature importance. We started with a base random forest model with 200 trees in the forest and some randomized bootstrapping
+to predict the star rating. The team then tuned the model using a grid search on a variety of variables, and cross-validation was used to validate the results of each fit. After tuning the model, 
+it produced a test R-squared value of around 0.62 as well as a list of important features in predicting the star rating.""")
 
 st.markdown("""
 The team chose to make use of Streamlit and Pydeck for the Ui and visualization elements of this application, as
