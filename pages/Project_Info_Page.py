@@ -115,18 +115,49 @@ st.image(rating_positive, caption="The most common positive words about McDonald
 rating_negative = Image.open('./assets/rating_1_common_words.png')
 st.image(rating_negative, caption="The most common negative words about McDonalds found in the Review Dataset")
 
-st.markdown(""" WE NEED INFO ON TOPIC MODELING AND SENTIMENT ANALYSIS""")
+st.markdown(""" 
+The third phase of the team's project largely centered around sentiment analysis, i.e. the process of reviewing digital 
+text in the hopes of ascertaining the emotional tone of the message. A score between -1, the worst, and 1, the best,
+is then assigned to the message based upon the analysis. This process was applied to all of the review data in the 
+Kaggle dataset(https://www.kaggle.com/datasets/nelgiriyewithana/mcdonalds-store-reviews), with adjustments made to 
+account for ratings without a written review.
 
-st.markdown("""BUILDING AND TUNING A RANDOM FOREST""")
+For the sentiment analysis phase of the project, the team made use of VADER, which stands for
+:blue[V]alence :blue[A]ware :blue[D]ictionary and s:blue[E]ntiment :blue[R]easoner. VADER is a lexicon and rule-based sentiment analysis tool that is 
+specifically attuned to sentiments expressed in social media and text from other domains.
+""")
 
-st.markdown("""APPLICATION DEVELOPMENT
+st.markdown(""":red[BUILDING AND TUNING A RANDOM FOREST, NEEDS A WRITE UP]""")
 
+st.markdown("""
 The team chose to make use of Streamlit and Pydeck for the Ui and visualization elements of this application, as
 both are relatively flexible and powerful. These tools allowed the team to easily integrate its work into an 
 approachable and aesthetically pleasing user-experience. 
+
+Streamlit is a simple-to-use, nearly all-in-one, data visualization tool, that allows for easy and quick 
+web-application development, without having to make use of more traditional web-app coding langugaes, such as HTML or 
+JavaScript.
+
+Pydeck was used to create the  search bar, dataset toggles, and interactive map on the index page. 
+Pydeck was chosen for its ease of use, as well as its relative stability when working with large datasets, a key factor
+in the team's decision to make use of it over "shinier" options like Folium.
+
+With the current application, users are able to make use of the model's functionality on the index/home page, as well as
+find helpful links to the documentation and data that the team used, reach out to the team member's, and of course 
+read this documentation and discussion. 
 """)
 
 st.markdown(""":red[Results]""")
+
+st.markdown("""The final performance result for the teams model, was 
+""")
+st.latex("R^2 : 0.615")
+
+st.markdown("""
+Which was a major improvement over earlier results, largely due to refinements in sentiment analysis and 
+iterative hyper-parameter tuning. The output of Feature importance metrics also demonstrates which 
+characteristics had a significant impact on a particular McDonalds' net rating. 
+""")
 
 st.markdown(""":red[Conclusions & Areas of Future Work]""")
 
