@@ -16,8 +16,12 @@ st.title(":blue[Project Info & Discussion]")
 
 st.markdown(" The Team has created a ML application to help users better evaluate a McDonalds")
 
-st.markdown("""   
-:red[What is exactly the function of your tool (or a method)? That is, what will it do?]""")
+st.markdown("The code for this project can be found at https://github.com/WillGodsey/CS_539_Group_Project")
+st.markdown("""the public-facing github page for this project can be found at 
+            https://willgodsey.github.io/CS_539_Group_Project/ ,
+            which also contains the README information""")
+
+st.markdown(""":red[What is exactly the function of your tool (or a method)? That is, what will it do?]""")
 
 st.markdown("""
 The goal and primary function of the team’s tool is to help users make well informed decisions regarding which fast-food
@@ -87,19 +91,44 @@ like the number of topics.
     """
 )
 
-st.markdown(""":red[Visuals Aids]""")
-
-st.markdown("""
-    :blue[Do we have anything we'd like to share?]
-""")
-
 st.markdown(""":red[Methodology & Process]""")
 
-methodology_diagram = Image.open('./assets/methodology_steps.JPG')
-st.image(methodology_diagram, caption="the Team's approach")
-st.markdown(""" place holder text""")
+st.markdown("""The below flow chart gives us a broad-stroke overview of the team's workflow for this project."
+         """)
 
-st.markdown(""":red[Results & Areas of Future Work]""")
+methodology_diagram = Image.open('./assets/methodology_steps.JPG')
+st.image(methodology_diagram, caption="Project Workflow")
+
+st.markdown("""
+    For this project, the first step was to clean the reviews dataset, to ensure that it did not contain any 
+    unusable data. This cleaning consisted of filtering out punctuation and special characters, performing a spell
+    check, and purging any reviews that were not tied to a particular establishment.  
+    
+    From here, the team began with exploratory dat analysis, which resulted in the finding shown in the two bar graphs 
+    shown below. Respectively, they show the worst commonly found in :blue["5-Star"] reviews, and those most commonly 
+    found in :blue["1-star"] reviews            
+""")
+
+rating_positive = Image.open('./assets/rating_5_common_words.png')
+st.image(rating_positive, caption="The most common positive words about McDonalds found in the Review Dataset")
+
+rating_negative = Image.open('./assets/rating_1_common_words.png')
+st.image(rating_negative, caption="The most common negative words about McDonalds found in the Review Dataset")
+
+st.markdown(""" WE NEED INFO ON TOPIC MODELING AND SENTIMENT ANALYSIS""")
+
+st.markdown("""BUILDING AND TUNING A RANDOM FOREST""")
+
+st.markdown("""APPLICATION DEVELOPMENT
+
+The team chose to make use of Streamlit and Pydeck for the Ui and visualization elements of this application, as
+both are relatively flexible and powerful. These tools allowed the team to easily integrate its work into an 
+approachable and aesthetically pleasing user-experience. 
+""")
+
+st.markdown(""":red[Results]""")
+
+st.markdown(""":red[Conclusions & Areas of Future Work]""")
 
 st.markdown("""
     The team is pleased to say that it has created a an approachable and effective sentiment analysis tool, 
@@ -112,10 +141,9 @@ st.markdown("""
     that based upon available information and national trends, would be able to give insight and recommendations for
     franchises that it was not familiar with, but the team rapidly learned that such an application was beyond the 
     timeframe and scope of this course. 
+    
+    In addition, the team would want to explore alternative models to compare and contrast with the current product, 
+    in hopes of finding an even better solution.
 """)
 
 
-st.markdown(""":red[Conclusions]""")
-
-st.markdown("""
-""")
