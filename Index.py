@@ -12,7 +12,7 @@ st.set_page_config(
 
 st.sidebar.success("Choose a Page")
 
-st.title('McDonalds Guru')
+st.title(":red[Grub Guru] :hamburger:")
 
 # Load dataframes
 map_df = pd.DataFrame(pd.read_csv('assets/cleaned_reviews.csv',  encoding='ISO-8859-1'),

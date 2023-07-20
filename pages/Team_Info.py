@@ -1,9 +1,9 @@
 import streamlit as st
 
 
-st.title("Team Information")
+st.title(":blue[Team Information]")
 
-st.write("Team Contact Info")
+st.markdown(":red[Team Contact Info]")
 
 st.write("Danielle Angelini: dangelini@wpi.edu")
 st.write("Wylie Borden: wborden@wpi.edu")

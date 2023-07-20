@@ -27,13 +27,8 @@ In order to use our code you will need a python environment, and to install the 
 12. collections
 13. re
 
-To use our code you will also need to ensure that you have downlaoded the necessary assets from the repository.
+To use our code you will also need to ensure that you have also downloaded the necessary assets from the repository.
 
-
-To Do:
-1. include project background info
-2. include methodology
-3. include results
-4. include concluions and future work
-
-PICTURES
+Now that you've dowloaded everything you'll need, just enter steamlit run index.py into your terminal. 
+From here you'll be able to make use of the team's application, as well as learn more about the team's motivation, process, the technology that we 
+used, as well as our thoughts on the current product, and areas of possible future work.
