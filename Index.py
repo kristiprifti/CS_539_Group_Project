@@ -86,9 +86,12 @@ if selected_address:
 
     coord = f'({lat}, {lon})'
 
-    features = website_df.loc[coord]
+    try:
+        features = website_df.loc[coord]
+    except KeyError:
+        st.error(f'Coordinates {coord} not found in the dataset.')
 
-    features_container = st.container()
+
 # container for the map
 map_container = st.container()
 with map_container:
