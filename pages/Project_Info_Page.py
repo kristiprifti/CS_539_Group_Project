@@ -111,7 +111,6 @@ st.image(rating_positive, caption="The most common words found in 5-star reviews
 rating_negative = Image.open('./assets/rating_1_common_words.png')
 st.image(rating_negative, caption="The most common words found in 1-star reviews about McDonald's")
 
-st.markdown("""insert about topic modeling here""")
 
 st.markdown(""" 
 The third phase of the team's project largely centered around sentiment analysis, i.e. the process of reviewing digital 
@@ -121,7 +120,12 @@ This process was applied to all of the review data in the Kaggle dataset(https:/
 If there was no review, the star rating was normalized between -1 and 1 to fill in for the compound score. This compound score was added to our master dataset for training.
 
 The team used a sentiment analysis package called VADER, which stands for :blue[V]alence :blue[A]ware :blue[D]ictionary and s:blue[E]ntiment :blue[R]easoner. 
-VADER is a lexicon and rule-based sentiment analysis tool that is specifically attuned to sentiments expressed in social media and text from other domains.
+VADER is a lexicon and rule-based sentiment analysis tool that is specifically 
+attuned to sentiments expressed in social media and text from other domains.
+
+For Topic Modeling, the team made use of Latent Dirichlet Allocation(LDA) with thirty different topics. 
+This process then statistically created topics from all of the available review data, while also assigning a 
+probability score to each review, that ti belonged to a particular topic.
 """)
 
 st.markdown("""The fourth phase of this project was the model development phase. The team chose to use a random forest since it performs well in a variety of 
